@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Facts & Vibes - Lab 4</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar / Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #556B2F;">
+    <div class="container">
+      <a class="navbar-brand" href="#">Anime Facts & Vibes</a>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <!-- Main Title -->
+    <h1 class="text-center mb-4">Anime Mood Tunes</h1>
+    <p class="text-center lead mb-5">Discover random anime facts and matching background music vibes!</p>
+
+    <!-- Buttons Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-8 text-center">
+        <button id="getRandomFact" class="btn btn-primary btn-lg m-2">Get Random Anime Fact</button>
+        <button id="getNewTrack" class="btn btn-success btn-lg m-2">New Background Track</button>
+        <button id="toggleMusic" class="btn btn-info btn-lg m-2">Play/Pause Music</button>
+      </div>
+    </div>
+
+    <!-- Content Area: Fact + Music + Images -->
+    <div class="row">
+      <!-- Anime Fact Card -->
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow" style="background-color: #f8f9fa;">
+          <div class="card-body">
+            <h2 class="card-title">Anime Fact</h2>
+            <p id="factText" class="card-text">Click the button above to load a fun anime fact!</p>
+            <!-- Placeholder for anime image -->
+            <img id="animeImage" src="https://via.placeholder.com/400x300?text=Anime+Image" alt="Anime Character/Scene" class="img-fluid rounded mt-3">
+          </div>
+        </div>
+      </div>
+
+      <!-- Music / Vibe Card -->
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow" style="background-color: #f8f9fa;">
+          <div class="card-body">
+            <h2 class="card-title">Background Vibe</h2>
+            <p id="trackInfo" class="card-text">Music will appear here...</p>
+            <!-- Audio player (I will make this work later) -->
+            <audio id="bgAudio" controls loop class="w-100 mt-3">
+              <source src="" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+            <!-- Placeholder for track thumbnail -->
+            <img id="trackImage" src="https://via.placeholder.com/400x300?text=Music+Cover" alt="Track Thumbnail" class="img-fluid rounded mt-3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+    <h3 class="text-center mt-5">Explore Anime Worlds with Sound</h3>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
