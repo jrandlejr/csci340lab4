@@ -5,9 +5,15 @@ $(document).ready(function() {
             $(this).html('<em>loading anime quote...</em>').fadeIn(500);
         });
 
-        fetch('https://api.animechan.io/v1/quotes/random')
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+        fetch('https://api.animechan.io/v1/quotes/random', { signal: controller.signal })
             .then(response => {
-                if (!response.ok) throw new Error('quote api failed');
+                clearTimeout(timeoutId);
+                if (!response.ok) {
+                    throw new Error('API not ok - status: ' + response.status + ' (check rate limit?)');
+                }
                 return response.json();
             })
             .then(data => {
@@ -27,11 +33,18 @@ $(document).ready(function() {
                 loadPalette();
             })
             .catch(error => {
-                console.log(error);
-                $('#factText').text('couldnt load quote - try again');
+                clearTimeout(timeoutId);
+                console.log('quote error:', error);
+                if (error.name === 'AbortError') {
+                    $('#factText').text('took too long - try again or check network');
+                } else if (error.message.includes('429')) {
+                    $('#factText').text('rate limit hit (5/hour free) - wait about an hour');
+                } else {
+                    $('#factText').text('couldnt load quote - check console for details');
+                }
             });
 
-        $(this).text('Loading...').delay(1500).queue(function(next) {
+        $(this).text('Fetching Quote...').delay(2000).queue(function(next) {
             $(this).text('New Anime Quote');
             next();
         });
@@ -70,5 +83,5 @@ $(document).ready(function() {
         });
     }
 
-    loadPalette();  // initial palette on load
+    loadPalette();  // initial load
 });
