@@ -1,93 +1,74 @@
-// script.js - Lab 4 jQuery stuff with anime quotes
-// James - using current animechan.io endpoint, fixed nested data parsing
-
 $(document).ready(function() {
 
-    // Random Quote button - https://api.animechan.io/v1/quotes/random
     $('#getRandomFact').on('click', function() {
-        // loading text
         $('#factText').fadeOut(300, function() {
-            $(this).html('<em>grabbing an anime quote... (might be slow if rate limited)</em>').fadeIn(500);
+            $(this).html('<em>loading anime quote...</em>').fadeIn(500);
         });
 
-        // timeout to avoid hanging forever
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8000);  // 8 sec max
-
-        fetch('https://api.animechan.io/v1/quotes/random', { signal: controller.signal })
+        fetch('https://api.animechan.io/v1/quotes/random')
             .then(response => {
-                clearTimeout(timeoutId);
-                if (!response.ok) {
-                    throw new Error('API not ok - status: ' + response.status + ' (check rate limit?)');
-                }
+                if (!response.ok) throw new Error('quote api failed');
                 return response.json();
             })
             .then(data => {
-                // FIXED: response is nested under data.data
-                const quote = data.data.content;  // quote text
-                const anime = data.data.anime.name;  // anime name
-                const character = data.data.character.name;  // character name
+                const quote = data.data.content;
+                const anime = data.data.anime.name;
+                const character = data.data.character.name;
 
-                // show formatted
                 $('#factText').fadeOut(400, function() {
-                    $(this).html(`<strong>${character} (${anime}):</strong><br>${quote}`).fadeIn(600);
+                    $(this).html(`<span class="character-name">${character}</span> (${anime}):<br>${quote}`).fadeIn(600);
                 });
 
-                // placeholder image with anime name
-                $('#animeImage').attr('src', `https://via.placeholder.com/400x300?text=${anime}+Quote`);
+                $('#animeImage').attr('src', 'https://picsum.photos/seed/' + encodeURIComponent(anime) + '/600/400');
 
-                // add subheader
                 $('#factText').siblings('h3').remove();
-                $('#factText').before(`<h3 class="mb-3">${anime} Quote:</h3>`);
+                $('#factText').before(`<h3 class="mb-4">${anime} Quote</h3>`);
+
+                loadPalette();
             })
             .catch(error => {
-                clearTimeout(timeoutId);
-                console.log('fetch error:', error);
-                if (error.name === 'AbortError') {
-                    $('#factText').text('took too long - try again or check network');
-                } else if (error.message.includes('429')) {
-                    $('#factText').text('rate limit hit (5/hour free) - wait about an hour');
-                } else {
-                    $('#factText').text('couldnt load quote - check console for details');
-                }
+                console.log(error);
+                $('#factText').text('couldnt load quote - try again');
             });
 
-        // button feedback
-        $(this).text('Fetching Quote...').delay(2000).queue(function(next) {
-            $(this).text('Get Random Anime Fact');
+        $(this).text('Loading...').delay(1500).queue(function(next) {
+            $(this).text('New Anime Quote');
             next();
         });
     });
 
-    // New Track button - placeholder for Openwhyd music next
-    $('#getNewTrack').on('click', function() {
-        $('#trackInfo').html('<em>looking for a track...</em>');
+    $('#refreshPalette').on('click', function() {
+        $('#paletteInfo').text('loading new palette...');
+        loadPalette();
 
-        $('#trackImage').slideUp(400).slideDown(600, function() {
-            $('#trackInfo').text("chill anime OST in background (demo for now)");
-        });
-
-        $(this).text("Fetching New Track...").delay(1500).queue(function(next) {
-            $(this).text("New Background Track");
+        $(this).text('Loading...').delay(1000).queue(function(next) {
+            $(this).text('New Vibe Colors');
             next();
         });
     });
 
-    // Toggle Music button - show/hide player
-    $('#toggleMusic').on('click', function() {
-        $('#bgAudio').fadeToggle(500);
+    function loadPalette() {
+        $.getJSON('https://www.colourlovers.com/api/palettes/random?format=json&jsonCallback=?', function(palettes) {
+            if (palettes && palettes.length > 0) {
+                const colors = palettes[0].colors;
 
-        if ($(this).text() === 'Play/Pause Music') {
-            $(this).text('Music Controls Shown');
-        } else {
-            $(this).text('Play/Pause Music');
-        }
+                const primary = '#' + colors[0];
+                const secondary = '#' + (colors[1] || colors[0]);
+                const accent = '#' + (colors[2] || colors[0]);
+                const bg = '#' + (colors[3] || 'ffffff');
 
-        $(this).addClass('btn-warning').delay(800).queue(function(next) {
-            $(this).removeClass('btn-warning');
-            next();
+                $('.card').css('background-color', primary + '10');
+                $('.card-title, h1, h2, h3').css('color', primary);
+                $('.btn-primary').css('background-color', secondary).css('border-color', secondary);
+                $('.btn-primary:hover').css('background-color', accent);
+                $('body').css('background-color', bg + '20');
+
+                $('#paletteInfo').text('Current vibe palette: ' + colors.map(c => '#' + c).join(' → '));
+            }
+        }).fail(function() {
+            $('#paletteInfo').text('couldnt load palette - using default theme');
         });
-    });
+    }
 
-    console.log("script loaded - animechan.io quotes with fixed parsing");
+    loadPalette();  // initial palette on load
 });
