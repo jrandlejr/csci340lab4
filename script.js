@@ -6,7 +6,7 @@
 
 
 $(document).ready(function() {
-   
+    // Button to load new quote + trigger palette (W3Schools .on() and .fadeOut() example)
     $('#getRandomFact').on('click', function() {
       
         $('#factText').fadeOut(300, function() {
