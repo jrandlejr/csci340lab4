@@ -1,6 +1,10 @@
-$(document).ready(function() {
+// James - Used W3Schools jQuery tutorial[](https://www.w3schools.com/jquery/) for .on(), .fadeOut(), .html(), .css(), .getJSON()
 
+
+$(document).ready(function() {
+   
     $('#getRandomFact').on('click', function() {
+      
         $('#factText').fadeOut(300, function() {
             $(this).html('<em>loading anime quote...</em>').fadeIn(500);
         });
@@ -8,6 +12,8 @@ $(document).ready(function() {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 8000);
 
+
+       
         fetch('https://api.animechan.io/v1/quotes/random', { signal: controller.signal })
             .then(response => {
                 clearTimeout(timeoutId);
@@ -21,16 +27,17 @@ $(document).ready(function() {
                 const anime = data.data.anime.name;
                 const character = data.data.character.name;
 
+                
                 $('#factText').fadeOut(400, function() {
                     $(this).html(`<span class="character-name">${character}</span> (${anime}):<br>${quote}`).fadeIn(600);
                 });
-
+                
                 $('#animeImage').attr('src', 'https://picsum.photos/seed/' + encodeURIComponent(anime) + '/600/400');
 
                 $('#factText').siblings('h3').remove();
                 $('#factText').before(`<h3 class="mb-4">${anime} Quote</h3>`);
 
-                loadPalette();
+                loadPalette(); 
             })
             .catch(error => {
                 clearTimeout(timeoutId);
@@ -83,5 +90,5 @@ $(document).ready(function() {
         });
     }
 
-    loadPalette();  // initial load
+    loadPalette(); 
 });
