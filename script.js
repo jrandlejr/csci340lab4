@@ -1,4 +1,8 @@
 // James - Used W3Schools jQuery tutorial[](https://www.w3schools.com/jquery/) for .on(), .fadeOut(), .html(), .css(), .getJSON()
+// James - Used W3Schools jQuery tutorial[](https://www.w3schools.com/jquery/) for .on(), .fadeOut(), .html(), .css(), .getJSON()
+// Also followed Khan Academy jQuery lessons for events and DOM changes
+// Built incrementally: first Bootstrap + fonts, then jQuery button events, then Animechan fetch, then COLOURlovers palette, then styling polish
+// Scrapped music due to CORS + no-key restriction from professor feedback
 
 
 $(document).ready(function() {
