@@ -51,7 +51,8 @@ $(document).ready(function() {
                 if (error.name === 'AbortError') {
                     $('#factText').text('took too long - try again or check network');
                 } else if (error.message.includes('429')) {
-                    $('#factText').text('rate limit hit (5/hour free) - wait about an hour');
+                    // NEW:
+                    $('#factText').text('could not load quote — API may be temporarily down, try again in a moment');
                 } else {
                     $('#factText').text('couldnt load quote - check console for details');
                 }
