@@ -17,7 +17,8 @@ $(document).ready(function() {
 
 
        
-        fetch('https://api.animechan.io/v1/quotes/random', { signal: controller.signal })
+        // Switched to animechan.vercel.app — original free endpoint, no rate limit, no API key needed
+        fetch('https://animechan.vercel.app/api/random', { signal: controller.signal })
             .then(response => {
                 clearTimeout(timeoutId);
                 if (!response.ok) {
