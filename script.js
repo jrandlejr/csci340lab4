@@ -27,9 +27,10 @@ $(document).ready(function() {
                 return response.json();
             })
             .then(data => {
-                const quote = data.data.content;
-                const anime = data.data.anime.name;
-                const character = data.data.character.name;
+                // OLD:
+            const quote = data.data.content;
+            const anime = data.data.anime.name;
+            const character = data.data.character.name;
 
                 
                 $('#factText').fadeOut(400, function() {
