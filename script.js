@@ -28,10 +28,10 @@ $(document).ready(function() {
                 return response.json();
             })
             .then(data => {
-                // OLD:
-            const quote = data.data.content;
-            const anime = data.data.anime.name;
-            const character = data.data.character.name;
+              // NEW — old API uses flat structure (learned from animechan.vercel.app/docs)
+            const quote = data.quote;
+            const anime = data.anime;
+            const character = data.character;
 
                 
                 $('#factText').fadeOut(400, function() {
