@@ -1,7 +1,7 @@
 // James - Used W3Schools jQuery tutorial[](https://www.w3schools.com/jquery/) for .on(), .fadeOut(), .html(), .css(), .getJSON()
 // Also followed Khan Academy jQuery lessons for events and DOM changes
 // NOTE: Originally used api.animechan.io/v1 (new API) but it has a 5 req/hour rate limit
-// Switched to animechan.vercel.app/api/random — original endpoint, no rate limit, no key required
+// NOTE: Switched to yurippe.vercel.app/api/quotes — animechan endpoints became unreliable
 // Source for jQuery methods used below: https://www.w3schools.com/jquery/
 
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
 
        
         // Switched to animechan.vercel.app — original free endpoint, no rate limit, no API key needed
-        fetch('https://animechan.vercel.app/api/random', { signal: controller.signal })
+        fetch('https://yurippe.vercel.app/api/quotes?random=1', { signal: controller.signal })
             .then(response => {
                 clearTimeout(timeoutId);
                 if (!response.ok) {
@@ -28,10 +28,10 @@ $(document).ready(function() {
                 return response.json();
             })
             .then(data => {
-              // NEW — old API uses flat structure (learned from animechan.vercel.app/docs)
-            const quote = data.quote;
-            const anime = data.anime;
-            const character = data.character;
+             // yurippe API returns an array, so we grab index [0]
+            const quote = data[0].quote;
+            const anime = data[0].show;
+            const character = data[0].character;
 
                 
                 $('#factText').fadeOut(400, function() {
