@@ -1,7 +1,8 @@
 // James - Used W3Schools jQuery tutorial[](https://www.w3schools.com/jquery/) for .on(), .fadeOut(), .html(), .css(), .getJSON()
 // Also followed Khan Academy jQuery lessons for events and DOM changes
-// Built incrementally: first Bootstrap + fonts, then jQuery button events, then Animechan fetch, then COLOURlovers palette, then styling polish
-// Scrapped music due to CORS + no-key restriction from professor feedback
+// NOTE: Originally used api.animechan.io/v1 (new API) but it has a 5 req/hour rate limit
+// Switched to animechan.vercel.app/api/random — original endpoint, no rate limit, no key required
+// Source for jQuery methods used below: https://www.w3schools.com/jquery/
 
 
 $(document).ready(function() {
