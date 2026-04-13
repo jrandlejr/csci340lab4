@@ -104,7 +104,13 @@ $(document).ready(function() {
              // Jikan wraps everything inside "data"
             // so data.data gets us to the actual anime fields
             console.log(data.data.title);
+
         })
+
+        // catch any network or API errors, very importan when pulling
+        .catch(error => {
+            console.log('Jikan error:', error);
+        });
 }
 
     loadPalette()
