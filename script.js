@@ -103,7 +103,7 @@ $(document).ready(function() {
         .then(data => {
              // Jikan wraps everything inside "data"
             // so data.data gets us to the actual anime fields
-            console.log(data);
+            console.log(data.data.title);
         })
 }
 
