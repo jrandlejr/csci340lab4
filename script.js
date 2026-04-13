@@ -19,7 +19,7 @@ $(document).ready(function() {
 
        
         // Switched to animechan.vercel.app — original free endpoint, no rate limit, no API key needed
-        fetch('https://yurippe.vercel.app/api/quotes?random=1', { signal: controller.signal })
+        fetch('https://yurippe.vercel.app/api/quotes?random=1&show=BLEACH', { signal: controller.signal })
             .then(response => {
                 clearTimeout(timeoutId);
                 if (!response.ok) {
@@ -30,7 +30,7 @@ $(document).ready(function() {
             .then(data => {
              // yurippe API returns an array, so we grab index [0]
             const quote = data[0].quote;
-            const anime = data[0].show;
+            const anime = data[0].show; 
             const character = data[0].character;
 
                 
