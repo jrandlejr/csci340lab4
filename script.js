@@ -101,6 +101,8 @@ $(document).ready(function() {
     fetch('https://api.jikan.moe/v4/random/anime')
         .then(response => response.json())
         .then(data => {
+             // Jikan wraps everything inside "data"
+            // so data.data gets us to the actual anime fields
             console.log(data);
         })
 }
