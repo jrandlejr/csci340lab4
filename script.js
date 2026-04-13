@@ -19,7 +19,7 @@ $(document).ready(function() {
 
        
         // Switched to animechan.vercel.app — original free endpoint, no rate limit, no API key needed
-        fetch('https://yurippe.vercel.app/api/quotes?random=1&show=BLEACH', { signal: controller.signal })
+        fetch('https://yurippe.vercel.app/api/quotes?random=1', { signal: controller.signal })
             .then(response => {
                 clearTimeout(timeoutId);
                 if (!response.ok) {
@@ -97,5 +97,14 @@ $(document).ready(function() {
         });
     }
 
-    loadPalette(); 
+    function loadAnimeInfo() {
+    fetch('https://api.jikan.moe/v4/random/anime')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+}
+
+    loadPalette()
+     loadAnimeInfo();
 });
