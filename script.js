@@ -107,7 +107,7 @@ $(document).ready(function() {
 
         })
 
-        // catch any network or API errors, very importan when pulling
+        // catch any network or API errors, very important when pulling
         .catch(error => {
             console.log('Jikan error:', error);
         });
