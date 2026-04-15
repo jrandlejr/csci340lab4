@@ -97,9 +97,9 @@ $(document).ready(function() {
         });
     }
 
-    function loadAnimeInfo() {
-    // Kitsu API — free anime database, no key needed, more reliable than Jikan threw errors  when trying to check the console
-    fetch('https://kitsu.io/api/edge/anime?page[limit]=1&page[offset]=' + Math.floor(Math.random() * 500))
+    // animeName is passed in from the yurippe quote so both APIs stay in sync
+    function loadAnimeInfo(animeName) {
+    fetch('https://kitsu.io/api/edge/anime?filter[text]=' + encodeURIComponent(animeName) + '&page[limit]=1')
         .then(response => response.json())
         .then(data => {
      // Kitsu always returns results as an array (a list) even for one anime
