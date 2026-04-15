@@ -108,8 +108,9 @@ $(document).ready(function() {
     // so data.data[0].attributes gets us to the actual title, rating, etc.
             const title = data.data[0].attributes.canonicalTitle;
             const rating = data.data[0].attributes.averageRating;
-            console.log('title:', title);
-             console.log('rating:', rating);
+            // using jQuery .text() to put the title and rating on the page
+            $('#animeTitle').text('Anime of the moment: ' + title);
+            $('#animeScore').text('Kitsu Rating: ' + rating);
 
         })
 
