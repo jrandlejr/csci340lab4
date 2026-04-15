@@ -109,6 +109,7 @@ $(document).ready(function() {
             const title = data.data[0].attributes.canonicalTitle;
             const rating = data.data[0].attributes.averageRating;
             console.log('title:', title);
+             console.log('rating:', rating);
 
         })
 
