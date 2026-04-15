@@ -98,12 +98,17 @@ $(document).ready(function() {
     }
 
     function loadAnimeInfo() {
-    fetch('https://api.jikan.moe/v4/random/anime')
+    // Kitsu API — free anime database, no key needed, more reliable than Jikan threw errors  when trying to check the console
+    fetch('https://kitsu.io/api/edge/anime?page[limit]=1&page[offset]=' + Math.floor(Math.random() * 500))
         .then(response => response.json())
         .then(data => {
-             // Jikan wraps everything inside "data"
-            // so data.data gets us to the actual anime fields
-            console.log(data.data.title);
+     // Kitsu always returns results as an array (a list) even for one anime
+    // data.data is that array, so we use [0] to grab the first item
+    // inside each item, the anime info lives inside .attributes
+    // so data.data[0].attributes gets us to the actual title, rating, etc.
+            const title = data.data[0].attributes.canonicalTitle;
+            const rating = data.data[0].attributes.averageRating;
+            console.log('title:', title);
 
         })
 
