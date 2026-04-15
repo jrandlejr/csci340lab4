@@ -43,7 +43,8 @@ $(document).ready(function() {
                 $('#factText').siblings('h3').remove();
                 $('#factText').before(`<h3 class="mb-4">${anime} Quote</h3>`);
 
-                loadPalette(); 
+               loadPalette();
+                loadAnimeInfo(anime);
             })
             .catch(error => {
                 clearTimeout(timeoutId);
@@ -111,15 +112,17 @@ $(document).ready(function() {
             // using jQuery .text() to put the title and rating on the page
             $('#animeTitle').text('Anime of the moment: ' + title);
             $('#animeScore').text('Kitsu Rating: ' + rating);
+            
+            
+    
 
         })
 
         // catch any network or API errors, very important when pulling
         .catch(error => {
-            console.log('Jikan error:', error);
+            console.log('Kitsu error:', error);
         });
 }
 
-    loadPalette()
-     loadAnimeInfo();
+    
 });
