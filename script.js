@@ -19,6 +19,7 @@ $(document).ready(function() {
 
        
         // Switched to animechan.vercel.app — original free endpoint, no rate limit, no API key needed
+        // Update: Animechan was down so I swithced to yurippe.
         fetch('https://yurippe.vercel.app/api/quotes?random=1', { signal: controller.signal })
             .then(response => {
                 clearTimeout(timeoutId);
