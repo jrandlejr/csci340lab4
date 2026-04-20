@@ -31,7 +31,7 @@ $(document).ready(function() {
             .then(data => {
              // yurippe API returns an array, so we grab index [0]
             const quote = data[0].quote;
-            const anime = data[0].show; 
+            const anime = data[0].show; // Confirms the attrubute of the anime quote being shown via website. (went over in office hours)
             const character = data[0].character;
 
                 
@@ -111,6 +111,7 @@ $(document).ready(function() {
             const title = data.data[0].attributes.canonicalTitle;
             const rating = data.data[0].attributes.averageRating;
             // using jQuery .text() to put the title and rating on the page
+            // This will show at the bottom of the page. 
             $('#animeTitle').text('Anime of the moment: ' + title);
             $('#animeScore').text('Kitsu Rating: ' + rating);
             
